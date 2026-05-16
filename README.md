@@ -8,6 +8,8 @@ Spring Boot backend와 Next.js + TypeScript frontend를 하나의 Git monorepo�
 homepage/
   backend/    # Spring Boot, Gradle
   frontend/   # Next.js, TypeScript
+  Dockerfile
+  docker-compose.yml
   README.md
   .gitignore
 ```
@@ -39,7 +41,6 @@ cd backend
 Docker 실행:
 
 ```bash
-cd backend
 cp .env.docker.example .env
 docker compose up --build
 ```
@@ -47,7 +48,6 @@ docker compose up --build
 Docker 종료:
 
 ```bash
-cd backend
 docker compose down
 ```
 
@@ -75,7 +75,7 @@ npm run build
 
 ## Git
 
-이 저장소는 `backend/`, `frontend/`를 포함하는 단일 Git 저장소입니다. `node_modules`, `.next`, Gradle `build`, `.gradle`, `.env*` 파일은 커밋 대상에서 제외됩니다.
+이 저장소는 `backend/`, `frontend/`를 포함하는 단일 Git 저장소입니다. `node_modules`, `.next`, Gradle `build`, `.gradle`, `.env*` 파일은 커밋 대상에서 제외됩니다. Docker Compose는 저장소 루트에서 실행합니다.
 
 초기화와 커밋을 다시 수행해야 할 때의 macOS 기준 명령어:
 
@@ -89,7 +89,7 @@ rm -rf homepage/backend/.gradle homepage/backend/build homepage/backend/.idea
 rm -rf homepage/frontend/node_modules homepage/frontend/.next
 cd homepage
 git init
-git add README.md .gitignore backend frontend
+git add README.md .gitignore .dockerignore Dockerfile docker-compose.yml .env.docker.example backend frontend
 git status --short --ignored
 git commit -m "chore: initialize homepage monorepo"
 ```

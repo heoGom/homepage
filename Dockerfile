@@ -2,13 +2,13 @@ FROM eclipse-temurin:17-jdk AS build
 
 WORKDIR /app
 
-COPY gradlew settings.gradle build.gradle ./
-COPY gradle ./gradle
+COPY backend/gradlew backend/settings.gradle backend/build.gradle ./
+COPY backend/gradle ./gradle
 
 RUN chmod +x ./gradlew
 RUN ./gradlew dependencies --no-daemon
 
-COPY src ./src
+COPY backend/src ./src
 
 RUN ./gradlew build -x test --no-daemon
 
